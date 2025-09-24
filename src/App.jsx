@@ -195,7 +195,7 @@ export default function ImposterWordGame() {
               </div>
             </div>
           </div>
-          <Button onClick={startGame}>Start Game</Button>
+          <Button onClick={startGame}>start game</Button>
         </motion.div>
       );
     }
@@ -210,12 +210,12 @@ export default function ImposterWordGame() {
           transition={{ duration: 0.1 }}
           className="flex flex-col h-full justify-center items-center text-center space-y-6 p-6"
         >
-          <p className="text-gray-500 font-medium">Pass the phone to</p>
+          <p className="text-gray-500 font-medium">pass the phone to</p>
           <h2 className="text-5xl font-extrabold text-gray-900 mt-2">
-            Player {currentPlayer}
+            player {currentPlayer}
           </h2>
           <Button onClick={seeWord}>
-            <Eye size={20} /> Reveal Word
+            <Eye size={20} /> reveal word
           </Button>
         </motion.div>
       );
@@ -233,28 +233,28 @@ export default function ImposterWordGame() {
           className="flex flex-col h-full justify-center items-center text-center space-y-8 p-6"
         >
           <h2 className="text-xl font-semibold text-gray-700">
-            You are Player {currentPlayer}
+            you are player {currentPlayer}
           </h2>
           {isImposter ? (
             <div className="space-y-2">
               <EyeOff className="mx-auto text-red-600 mb-2" size={48} />
               <p className="text-red-700 font-extrabold text-3xl">
-                You are the Imposter!
+                you are the imposter!
               </p>
               <p className="text-red-600 text-lg">
-                Don’t get caught. Listen carefully.
+                don’t get caught. listen carefully.
               </p>
             </div>
           ) : (
             <div className="space-y-2">
               <p className="text-green-700 font-semibold text-lg">
-                Secret Word:
+                secret Word:
               </p>
               <p className="text-4xl font-extrabold text-green-800">
                 {secretWord}
               </p>
               <p className="text-green-600 text-lg">
-                Try to blend in with your description.
+                try to blend in with your description.
               </p>
             </div>
           )}
@@ -276,13 +276,13 @@ export default function ImposterWordGame() {
           className="flex flex-col h-full justify-center items-center text-center space-y-6 p-6"
         >
           <h2 className="text-3xl font-extrabold text-gray-900">
-            Time to Discuss!
+            time to Discuss!
           </h2>
           <p className="text-lg text-gray-600">
-            Everyone has seen their word. Try to find the imposter.
+            everyone has seen their word. try to find the imposter.
           </p>
           <Button variant="subtle" onClick={() => setGameState("complete")}>
-            Reveal Results
+            reveal results
           </Button>
         </motion.div>
       );
@@ -299,20 +299,20 @@ export default function ImposterWordGame() {
           className="flex flex-col h-full justify-center items-center text-center space-y-6 p-6"
         >
           <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-            Game Over
+            game over
           </h2>
           <p className="text-gray-700 font-semibold text-lg">
-            The secret word was{" "}
+            the secret word was{" "}
             <span className="text-indigo-800 font-bold">{secretWord}</span>
           </p>
           <p className="text-gray-700 font-semibold text-lg">
-            The imposter was{" "}
+            the imposter was{" "}
             <span className="text-indigo-800 font-bold">
-              Player {imposterIndex}
+              player {imposterIndex}
             </span>
           </p>
           <Button onClick={resetGame}>
-            <RotateCcw size={18} /> Play Again
+            <RotateCcw size={18} /> play again
           </Button>
         </motion.div>
       );
