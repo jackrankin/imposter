@@ -23,12 +23,18 @@ export default function ImposterWordGame() {
     "Coffee",
     "Guitar",
     "Telescope",
+    "Iron Man",
+    "Diet Coke",
+    "Grass",
+    "New York City",
+    "Boyfriend",
+    "Girlfriend",
   ];
 
   const startGame = () => {
     const players = parseInt(numPlayers);
-    if (isNaN(players) || players < 3 || players > 12) {
-      setMessage("Please enter a number of players between 3 and 12.");
+    if (isNaN(players) || players < 3 || players > 67) {
+      setMessage("Please enter a number of players between 3 and 67.");
       return;
     }
     if (!secretWord.trim()) {
@@ -132,38 +138,39 @@ export default function ImposterWordGame() {
           className="flex flex-col h-full justify-center p-6 space-y-8"
         >
           <div className="text-center space-y-2">
-            <motion.div
+            {/* <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
             >
               <Users className="text-white" size={32} />
-            </motion.div>
-            <h1 className="text-4xl font-extrabold text-gray-900">Imposter</h1>
-            <p className="text-lg text-gray-600">
-              One player is the imposter. Find them!
-            </p>
+            </motion.div> */}
+            <h1 className="text-4xl font-extrabold text-gray-900">
+              find the imposter
+            </h1>
           </div>
 
           <div className="space-y-6">
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700">
-                Number of Players
+                number of players
               </label>
               <input
-                type="number"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 min="3"
-                max="12"
+                max="67"
                 value={numPlayers}
                 onChange={(e) => setNumPlayers(e.target.value)}
                 className="mt-1 w-full border-b-2 border-gray-300 bg-transparent py-2 text-center text-3xl font-bold focus:border-purple-500 focus:outline-none transition-colors"
-                placeholder="3-12"
+                placeholder="3-67"
               />
             </div>
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700">
-                Secret Word
+                secret word
               </label>
               <div className="flex gap-2">
                 <input
@@ -173,15 +180,15 @@ export default function ImposterWordGame() {
                     setSecretWord(e.target.value);
                     setRevealSetupWord(true);
                   }}
-                  className={`flex-1 border-b-2 border-gray-300 bg-transparent py-2 text-center text-2xl font-bold focus:border-purple-500 focus:outline-none transition-colors ${
+                  className={`flex-1 border-b-2 border-gray-300 bg-transparent py-2 text-center text-xl font-bold focus:border-purple-500 focus:outline-none transition-colors ${
                     !revealSetupWord && secretWord ? "blur-sm" : ""
                   }`}
-                  placeholder="Enter or randomize"
+                  placeholder="enter or click randomize"
                 />
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={getRandomWord}
-                  className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
                 >
                   <Shuffle size={20} className="text-gray-600" />
                 </motion.button>
@@ -203,17 +210,10 @@ export default function ImposterWordGame() {
           transition={{ duration: 0.1 }}
           className="flex flex-col h-full justify-center items-center text-center space-y-6 p-6"
         >
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "tween", stiffness: 600, damping: 15 }}
-            className="bg-white p-6 rounded-3xl shadow-lg border border-gray-200 w-full max-w-sm"
-          >
-            <p className="text-gray-500 font-medium">Pass the phone to</p>
-            <h2 className="text-5xl font-extrabold text-gray-900 mt-2">
-              Player {currentPlayer}
-            </h2>
-          </motion.div>
+          <p className="text-gray-500 font-medium">Pass the phone to</p>
+          <h2 className="text-5xl font-extrabold text-gray-900 mt-2">
+            Player {currentPlayer}
+          </h2>
           <Button onClick={seeWord}>
             <Eye size={20} /> Reveal Word
           </Button>
@@ -235,40 +235,29 @@ export default function ImposterWordGame() {
           <h2 className="text-xl font-semibold text-gray-700">
             You are Player {currentPlayer}
           </h2>
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className={`p-8 rounded-3xl w-full max-w-sm ${
-              isImposter
-                ? "bg-red-50 border-2 border-red-300"
-                : "bg-green-50 border-2 border-green-300"
-            }`}
-          >
-            {isImposter ? (
-              <div className="space-y-2">
-                <EyeOff className="mx-auto text-red-600 mb-2" size={48} />
-                <p className="text-red-700 font-extrabold text-3xl">
-                  You are the Imposter!
-                </p>
-                <p className="text-red-600 text-lg">
-                  Don’t get caught. Listen carefully.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                <p className="text-green-700 font-semibold text-lg">
-                  Secret Word:
-                </p>
-                <p className="text-4xl font-extrabold text-green-800">
-                  {secretWord}
-                </p>
-                <p className="text-green-600 text-lg">
-                  Try to blend in with your description.
-                </p>
-              </div>
-            )}
-          </motion.div>
+          {isImposter ? (
+            <div className="space-y-2">
+              <EyeOff className="mx-auto text-red-600 mb-2" size={48} />
+              <p className="text-red-700 font-extrabold text-3xl">
+                You are the Imposter!
+              </p>
+              <p className="text-red-600 text-lg">
+                Don’t get caught. Listen carefully.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <p className="text-green-700 font-semibold text-lg">
+                Secret Word:
+              </p>
+              <p className="text-4xl font-extrabold text-green-800">
+                {secretWord}
+              </p>
+              <p className="text-green-600 text-lg">
+                Try to blend in with your description.
+              </p>
+            </div>
+          )}
           <Button onClick={nextPlayer}>
             {currentPlayer < parseInt(numPlayers) ? "Next Player" : "End Game"}
           </Button>
@@ -312,18 +301,16 @@ export default function ImposterWordGame() {
           <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
             Game Over
           </h2>
-          <div className="bg-indigo-50 border-2 border-indigo-300 rounded-2xl p-6 w-full max-w-sm space-y-4">
-            <p className="text-gray-700 font-semibold text-lg">
-              The secret word was{" "}
-              <span className="text-indigo-800 font-bold">{secretWord}</span>
-            </p>
-            <p className="text-gray-700 font-semibold text-lg">
-              The imposter was{" "}
-              <span className="text-indigo-800 font-bold">
-                Player {imposterIndex}
-              </span>
-            </p>
-          </div>
+          <p className="text-gray-700 font-semibold text-lg">
+            The secret word was{" "}
+            <span className="text-indigo-800 font-bold">{secretWord}</span>
+          </p>
+          <p className="text-gray-700 font-semibold text-lg">
+            The imposter was{" "}
+            <span className="text-indigo-800 font-bold">
+              Player {imposterIndex}
+            </span>
+          </p>
           <Button onClick={resetGame}>
             <RotateCcw size={18} /> Play Again
           </Button>
